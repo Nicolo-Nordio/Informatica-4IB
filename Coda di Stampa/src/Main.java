@@ -6,17 +6,14 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         int casual = random.nextInt(1,6);
+        int nFile = 1;
         for (int i = 0; i < casual; i++) {
-            System.out.print("Inserisci il nome del file: ");
-            String nomeFile = scanner.nextLine();
-
             try {
-                FileTesto fileTesto = new FileTesto(nomeFile);
+                FileTesto fileTesto = new FileTesto("Print"+nFile);
 
-                System.out.print("Inserisci il testo da scrivere nel file: ");
-                String testoDaScrivere = scanner.nextLine();
-
-                fileTesto.write(testoDaScrivere);
+                fileTesto.write("*****INIZIO*****"+"\n");
+                fileTesto.write("Random Character"+"\n");
+                fileTesto.write("*****FINE*****");
 
                 String contenuto = fileTesto.read();
 
@@ -27,6 +24,7 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            nFile++;
         }
     }
 }
