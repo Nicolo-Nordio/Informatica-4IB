@@ -2,37 +2,41 @@ import java.io.*;
 import java.util.Random;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         PrintQueue printQueue = new PrintQueue();
         Random random1 = new Random();
         Random random2 = new Random();
-        int casual = random1.nextInt(1, 6);
-        char charcasual = (char) random2.nextInt(0, 255);
-        String strcaratteri = "";
+        int casual = random1.nextInt(2, 11);
         int nFile = 1;
         for (int i = 0; i < casual; i++) {
             try {
+                String strcaratteri = "";
                 for (int j = 0; j < 10; j++) {
+                    char charcasual = (char) random2.nextInt(256);
                     strcaratteri += charcasual;
                 }
 
-                FileTesto fileTesto = new FileTesto("Print" + nFile + ".txt");
-                fileTesto.write("*****INIZIO*****" + "\n");
+                FileTesto fileTesto = new FileTesto("File" + nFile + ".txt");
                 fileTesto.write(strcaratteri + "\n");
-                fileTesto.write("*****FINE*****");
                 printQueue.push(fileTesto);
-                fileTesto.close();
+                nFile++;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            nFile++;
         }
-        /*
-        while (!printQueue.isEmpty()){
-            String contenuto = printQueue.pop();
-            System.out.println("Questo è il contenuto del file:");
-            System.out.println(contenuto);
+
+        FileTesto printFile = new FileTesto("Print.txt");
+        printFile.write("*****INIZIO*****" + "\n");
+        while (!printQueue.isEmpty()) {
+            FileTesto fileToPrint = printQueue.pop();
+            String contenuto = fileToPrint.read();
+            try {
+                printFile.write(contenuto);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        */
+        printFile.write("*****FINE*****");
+        printFile.close();
     }
 }

@@ -31,18 +31,21 @@ public class PrintQueue {
     public void push(FileTesto carattere) {
         Node newNode = new Node(carattere);
         if (head == null) {
-            newNode.next = head;
             head = newNode;
+            back = newNode;
+        } else {
+            back.next = newNode;
+            back = newNode;
         }
-        newNode.next = back;
-        back = newNode;
     }
 
-    public void pop(FileTesto file) {
+    public FileTesto pop() {
         if (isEmpty()) {
-            throw new IllegalStateException("la pila è vuota");
+            throw new IllegalStateException("La coda è vuota");
         }
+        Node removedNode = head;
         head = head.next;
+        return removedNode.value;
     }
 
     public boolean isEmpty() {return head == null;}
