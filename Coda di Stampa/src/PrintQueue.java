@@ -41,7 +41,7 @@ public class PrintQueue {
 
     public FileTesto pop() {
         if (isEmpty()) {
-            throw new IllegalStateException("La coda è vuota");
+            System.out.println("La coda è vuota");
         }
         Node removedNode = head;
         head = head.next;
