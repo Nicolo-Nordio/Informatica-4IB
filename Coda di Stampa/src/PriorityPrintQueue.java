@@ -1,8 +1,7 @@
 import java.io.IOException;
 
-public class PrintQueue {
+public class PriorityPrintQueue {
     private Node head;
-    private Node back;
 
     public static class Node {
         private FileTesto value;
@@ -10,7 +9,7 @@ public class PrintQueue {
 
         Node(FileTesto value) {
             this.value = value;
-            next = null;
+            this.next = null;
         }
 
         @Override
@@ -23,29 +22,36 @@ public class PrintQueue {
         }
     }
 
-    PrintQueue() {
+    PriorityPrintQueue() {
         this.head = null;
-        this.back = null;
     }
 
-    public void push(FileTesto carattere) {
-        Node newNode = new Node(carattere);
+    public void push(FileTesto file) {
+        Node newNode = new Node(file);
         if (head == null) {
             head = newNode;
-            back = newNode;
-        } else {
-            back.next = newNode;
-            back = newNode;
+        } else if(file.getPeso()>head.value.getPeso()) {
+                newNode.next=head;
+                head = newNode;
+        }else{
+            Node temp = head;
+            while (temp.next!=null&&temp.next.value.getPeso()>file.getPeso()){
+                temp=temp.next;
+            }
+            newNode.next = temp.next;
+            temp.next = newNode;
         }
     }
 
     public FileTesto pop() {
         if (isEmpty()) {
             System.out.println("La coda è vuota");
+        }else{
+            Node removedNode = head;
+            head = head.next;
+            return removedNode.value;
         }
-        Node removedNode = head;
-        head = head.next;
-        return removedNode.value;
+        return null;
     }
 
     public boolean isEmpty() {return head == null;}
