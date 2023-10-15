@@ -4,11 +4,17 @@ class FileTesto {
     private String nomeFile;
     private BufferedWriter writer;
     private BufferedReader reader;
+    private int peso;
 
-    public FileTesto(String nomeFile) throws IOException {
+    public FileTesto(String nomeFile, int peso) throws IOException {
         this.nomeFile = nomeFile;
         this.writer = new BufferedWriter(new FileWriter(nomeFile));
         this.reader = new BufferedReader(new FileReader(nomeFile));
+        this.peso = peso;
+    }
+
+    public int getPeso() {
+        return this.peso;
     }
 
     public String read() throws IOException {
@@ -27,16 +33,8 @@ class FileTesto {
         writer.flush();
     }
 
-    public void close() {
-        try {
-            if (writer != null) {
-                writer.close();
-            }
-            if (reader != null) {
-                reader.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void close() throws IOException{
+        writer.close();
+        reader.close();
     }
 }
