@@ -5,8 +5,32 @@ import java.util.Stack;
 public class BTree {
     protected List<Integer> treeList;
 
+    private int currentIndex;
+
     public BTree() {
         this.treeList = new ArrayList<>();
+    }
+
+
+    public int search(int val){
+
+    }
+
+    public int leftChild(int val){
+
+        return
+    }
+
+    public int rightChild(int val){
+
+        return
+    }
+
+    public boolean fatherExist(){
+        if((currentIndex-1)/2 == ) {
+            return true;
+        }
+        return false;
     }
 
     public List<Integer> preOrder() {
@@ -19,7 +43,7 @@ public class BTree {
         stack.push(0);
 
         while (!stack.isEmpty()) {
-            int currentIndex = stack.pop();
+            currentIndex = stack.pop();
             result.add(treeList.get(currentIndex));
 
             int rightChildIndex = 2 * currentIndex + 2;
