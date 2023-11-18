@@ -4,7 +4,6 @@ import java.util.Stack;
 
 public class BTree {
     protected List<Integer> treeList;
-
     private int currentIndex;
 
     public BTree() {
