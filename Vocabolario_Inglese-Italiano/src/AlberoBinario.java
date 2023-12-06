@@ -58,7 +58,6 @@ public class AlberoBinario {
         }
     }
 
-
     public String search(String parola, Node current) {
         if (current == null) {
             return null;
