@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 
 public class BinaryTree<E> {
-
     static public class Node<E>{
         private int value;
         private Node<E> left;
         private Node<E> right;
 
-        Node(int value){
+        Node(){
             this.left = null;
             this.right = null;
             value = 0;
@@ -49,8 +48,16 @@ public class BinaryTree<E> {
         root = null;
     }
 
-    public BinaryTree(Node root){
+    public BinaryTree(Node<E> root){
         this.root = root;
+    }
+
+    /**
+     * Restituisce il 'root'
+     * @return
+     */
+    public Node<E> getRoot() {
+        return root;
     }
 
     /**
@@ -59,7 +66,38 @@ public class BinaryTree<E> {
      * @return
      */
     public String print(Node r){
-        return
+        //
+        return "";
+    }
+
+    /**
+     * Aggiunge il dato 'val' all’albero rispettando la struttura dell’albero di ricerca
+     * @param
+     */
+    public void insert(int inizio, int fine, Node current, ArrayList<Node> vocaboli) {
+        if (inizio <= fine) {
+            int medio = (inizio + fine) / 2;
+            Node nodoMedio = vocaboli.get(medio);
+            current.setValue(nodoMedio.getValue());
+
+            if (inizio < medio) {
+                current.setLeft(new Node());
+                insert(inizio, medio - 1, current.getLeft(), vocaboli);
+            }
+
+            if (medio < fine) {
+                current.setRight(new Node());
+                insert(medio + 1, fine, current.getRight(), vocaboli);
+            }
+        }
+    }
+
+    /**
+     * Elimina il dato val dall’albero
+     * @param val
+     */
+    public void del(E val){
+
     }
 
     /**
@@ -95,10 +133,11 @@ public class BinaryTree<E> {
         return nFoglie;
     }
 
-    public Node getRoot() {
-        return root;
-    }
-
+    /**
+     * Crea l'intero albero binario
+     * (opzionale per non farlo direttamente sul 'main')
+     * @param nodi
+     */
     public void createBTree(ArrayList<Node> nodi){
 
     }
