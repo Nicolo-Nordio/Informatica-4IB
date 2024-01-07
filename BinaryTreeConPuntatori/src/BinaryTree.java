@@ -1,144 +1,129 @@
-import java.util.ArrayList;
-
 public class BinaryTree<E> {
-    static public class Node<E>{
-        private int value;
+    static public class Node<E> {
+        private E value;
         private Node<E> left;
         private Node<E> right;
 
-        Node(){
+        Node() {
             this.left = null;
             this.right = null;
-            value = 0;
+            this.value = null;
         }
 
         /**
          * Vari getter
+         *
          * @return
          */
-        public int getValue() {
+        public E getValue() {
             return value;
         }
+
         public Node<E> getLeft() {
             return left;
         }
+
         public Node<E> getRight() {
             return right;
         }
 
         /**
          * Vari setter
+         *
          * @param
          */
-        public void setValue(int value) {
+        public void setValue(E value) {
             this.value = value;
         }
-        public void setRight(Node<E> right) {
-            this.right = right;
+
+        public void setRight(E val) {
+            this.right = new Node<>();
+            this.right.setValue(val);
         }
-        public void setLeft(Node<E> left) {
-            this.left = left;
+
+        public void setLeft(E val) {
+            this.left = new Node<>();
+            this.left.setValue(val);
         }
     }
 
     private Node<E> root;
-    private ArrayList<Node> nodi = new ArrayList<>();
 
+    /**
+     * Costruttore dell’albero binario vuoto
+     */
     public BinaryTree() {
         root = null;
     }
 
-    public BinaryTree(Node<E> root){
-        this.root = root;
-    }
+    /**
+     * Costruttore dell’albero binario con un nodo radice
+     *
+     * @param root
+     */
+    public BinaryTree(Node<E> root) {this.root = root;}
 
     /**
-     * Restituisce il 'root'
+     * Restituisce la radice dell'albero
+     *
      * @return
      */
     public Node<E> getRoot() {
         return root;
     }
 
+    public void setRoot(E val) {
+        this.root = new Node<>();
+        this.root.setValue(val);
+    }
+
     /**
      * Restituisce una rappresentazione testuale dell'albero binario
+     *
      * @param r
-     * @return
+     * @return stringa: ((( 30 ) 20 ) 10 (( 50 ) 40 ( 60 ( 70 ))))
      */
-    public String print(Node r){
-        //
-        return "";
-    }
-
-    /**
-     * Aggiunge il dato 'val' all’albero rispettando la struttura dell’albero di ricerca
-     * @param
-     */
-    public void insert(int inizio, int fine, Node current, ArrayList<Node> vocaboli) {
-        if (inizio <= fine) {
-            int medio = (inizio + fine) / 2;
-            Node nodoMedio = vocaboli.get(medio);
-            current.setValue(nodoMedio.getValue());
-
-            if (inizio < medio) {
-                current.setLeft(new Node());
-                insert(inizio, medio - 1, current.getLeft(), vocaboli);
-            }
-
-            if (medio < fine) {
-                current.setRight(new Node());
-                insert(medio + 1, fine, current.getRight(), vocaboli);
-            }
+    public String printRec(Node r){
+        if(r == null){
+            return null;
         }
-    }
 
-    /**
-     * Elimina il dato val dall’albero
-     * @param val
-     */
-    public void del(E val){
-
+        return "( " + printRec(r.getLeft()) + r.getValue() + printRec(r.getRight()) + " )";
     }
 
     /**
      * Cerca se il valore val appartiene o meno all’albero binario usando una visita in ordine anticipato
+     *
      * @param value
-     * @param current
      * @return
      */
-    public boolean search(int value, Node current) {
-        if (current == null) {
+    public boolean search(E value, Node r) {
+        if (r == null) {
             return false;
         }
 
-        int currentValue = current.getValue();
-
-        if (value == currentValue) {
-            return true;
-        } else if (value < currentValue) {
-            return search(value, current.getLeft());
-        } else {
-            return search(value, current.getRight());
-        }
+        return value.equals(r.getValue()) || search(value, r.getLeft()) || search(value, r.getRight());
     }
 
     /**
      * Conta il numero di foglie dell’albero
+     *
      * @param r
      * @return nFoglie;
      */
-    public int contaFoglie(Node r){
-        int nFoglie = 0;
-        //Inserire codice
-        return nFoglie;
+    public int contaFoglie(Node r) {
+        if(r == null){
+            return 0;
+        }
+
+        return 1 + contaFoglie(r.getLeft()) + contaFoglie(r.getRight());
     }
 
     /**
      * Crea l'intero albero binario
      * (opzionale per non farlo direttamente sul 'main')
-     * @param nodi
      */
-    public void createBTree(ArrayList<Node> nodi){
+    public void createBTree() {
 
     }
 }
