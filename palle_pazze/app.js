@@ -1,12 +1,9 @@
-// Creazione dell'elemento canvas e impostazione delle dimensioni
-let canvas = document.createElement('canvas');
-let w = window.innerWidth * 0.8; // 80% della larghezza della finestra
-let h = window.innerHeight * 0.8; // 80% dell'altezza della finestra
-canvas.width = w;
-canvas.height = h;
-document.body.appendChild(canvas);
+const canvas = document.getElementById('mycanvas');
 
-let ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d');
+
+const w = canvas.width;
+const h = canvas.height;
 
 // Definizione della classe Circle
 class Circle {
@@ -24,6 +21,7 @@ class Circle {
         ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
         ctx.fillStyle = this.color;
         ctx.fill();
+        ctx.closePath();
     }
 
     update() {
@@ -45,45 +43,54 @@ class Circle {
         let distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < this.r + other.r) {
-            // Calcola l'angolo di collisione
+            // Calcola l'angolo di collisione tra i due cerchi
             let angle = Math.atan2(dy, dx);
 
-            // Calcola le nuove velocità utilizzando le funzioni trigonometriche
+            // Calcola le velocità iniziali dei due cerchi
             let speed1 = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
             let speed2 = Math.sqrt(other.vx * other.vx + other.vy * other.vy);
 
-            let direction1 = Math.atan2(this.vy, this.vx);
-            let direction2 = Math.atan2(other.vy, other.vx);
+            let direction1 = Math.atan2(this.vy, this.vx);  // Direzione della velocità del cerchio corrente
+            let direction2 = Math.atan2(other.vy, other.vx);  // Direzione della velocità dell'altro cerchio
 
+            // Ruota le velocità in modo che siano allineate con l'asse di collisione
             let vx1 = speed1 * Math.cos(direction1 - angle);
             let vy1 = speed1 * Math.sin(direction1 - angle);
             let vx2 = speed2 * Math.cos(direction2 - angle);
             let vy2 = speed2 * Math.sin(direction2 - angle);
 
-            let final_vx1 = ((this.r - other.r) * vx1 + (other.r + other.r) * vx2) / (this.r + other.r);
-            let final_vx2 = ((this.r + this.r) * vx1 + (other.r - this.r) * vx2) / (this.r + other.r);
+            // Calcola le nuove velocità dopo la collisione utilizzando le formule di conservazione della quantità di moto
+            let final_vx1 = ((this.r - other.r) * vx1 + (2 * other.r) * vx2) / (this.r + other.r);
+            let final_vx2 = ((2 * this.r) * vx1 + (other.r - this.r) * vx2) / (this.r + other.r);
 
-            // Aggiorna le velocità dei cerchi
+            // Aggiorna le velocità dei cerchi considerando la direzione dell'angolo di collisione
             this.vx = Math.cos(angle) * final_vx1 + Math.cos(angle + Math.PI / 2) * vy1;
             this.vy = Math.sin(angle) * final_vx1 + Math.sin(angle + Math.PI / 2) * vy1;
             other.vx = Math.cos(angle) * final_vx2 + Math.cos(angle + Math.PI / 2) * vy2;
             other.vy = Math.sin(angle) * final_vx2 + Math.sin(angle + Math.PI / 2) * vy2;
         }
     }
-
 }
+
+// Creazione array di colori rgb (rosso, verde, blu, giallo)
+let colors = ['rgb(255,0,0)', 'rgb(0,255,0)', 'rgb(0,0,255)', 'rgb(255,255,0)'];
+
+const positionX = w / 4;
+const positionY = h / 4;
 
 // Creazione dei cerchi
 let circles = [
-    new Circle(w / 4, h / 4, 50, 'red', Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(3 * w / 4, h / 4, 50, 'yellow', Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(w / 4, 3 * h / 4, 50, 'green', Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(3 * w / 4, 3 * h / 4, 50, 'blue', Math.random() * 2 - 1, Math.random() * 2 - 1)
+    new Circle(positionX, positionY, 50, colors[0], Math.random() * 2 - 1, Math.random() * 2 - 1),
+    new Circle(3 * positionX, positionY, 50, colors[1], Math.random() * 2 - 1, Math.random() * 2 - 1),
+    new Circle(positionX, 3 * positionY, 50, colors[2], Math.random() * 2 - 1, Math.random() * 2 - 1),
+    new Circle(3 * positionX, 3 * positionY, 50, colors[3], Math.random() * 2 - 1, Math.random() * 2 - 1)
 ];
 
 // Funzione di aggiornamento
 function update() {
+    // Pulisci il canvas
     ctx.clearRect(0, 0, w, h);
+
     for (let circle of circles) {
         circle.update();
         circle.draw();
@@ -97,18 +104,37 @@ function update() {
     }
 }
 
-let button = document.createElement('button');
-button.textContent = 'Resetta';
-button.style.display = 'block';
-button.addEventListener('click', () => {
-    // Resetta i cerchi
+let usedColors = [];
+
+function getRandomColor() {
+    if (colors.length === 0) {
+        // Se l'array dei colori è vuoto, significa che sono stati utilizzati tutti i colori
+        return null;
+    }
+
+    // Ottieni un colore random e rimuovilo dall'array
+    let randomIndex = Math.floor(Math.random() * colors.length);
+    let randomColor = colors.splice(randomIndex, 1)[0];
+
+    usedColors.push(randomColor);
+
+    return randomColor;
+}
+
+function restart() {
+    // Riaggiungi i colori utilizzati nuovamente all'array dei colori
+    colors = colors.concat(usedColors);
+
+    // Svuota l'array dei colori usati
+    usedColors = [];
+
+    // Resetta i cerchi e assegna colori random
     circles = [
-        new Circle(w / 4, h / 4, 50, 'red', Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(3 * w / 4, h / 4, 50, 'yellow', Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(w / 4, 3 * h / 4, 50, 'green', Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(3 * w / 4, 3 * h / 4, 50, 'blue', Math.random() * 2 - 1, Math.random() * 2 - 1)
+        new Circle(positionX, positionY, 50, getRandomColor(), Math.random() * 2 - 1, Math.random() * 2 - 1),
+        new Circle(3 * positionX, positionY, 50, getRandomColor(), Math.random() * 2 - 1, Math.random() * 2 - 1),
+        new Circle(positionX, 3 * positionY, 50, getRandomColor(), Math.random() * 2 - 1, Math.random() * 2 - 1),
+        new Circle(3 * positionX, 3 * positionY, 50, getRandomColor(), Math.random() * 2 - 1, Math.random() * 2 - 1)
     ];
-});
-document.body.appendChild(button);
+}
 
 update();

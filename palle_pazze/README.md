@@ -1,29 +1,37 @@
-# Progetto di Animazione di Cerchi con Collisioni
+# Documentazione del Codice - Palle Pazze
 
-Questo progetto utilizza JavaScript e il Canvas API per creare un'animazione di cerchi che rimbalzano all'interno di un canvas. Quando due cerchi si scontrano, i loro colori si mescolano.
+Il seguente codice implementa un'applicazione di animazione nel canvas HTML, chiamata "Palle Pazze". L'applicazione presenta un insieme di sfere colorate che si muovono all'interno di un canvas, rimbalzando contro i bordi e reagendo alle collisioni tra di loro.
 
-## Funzionalità
+## Struttura del Codice
 
-- **Animazione di cerchi**: I cerchi si muovono in modo casuale all'interno del canvas, rimbalzando sui bordi.
+### Classe `Circle`
 
-- **Reset**: Un pulsante permette di resettare l'applicazione.
+La classe `Circle` rappresenta una sfera nel canvas, con proprietà come posizione, raggio, colore e velocità lungo gli assi x e y. La classe include metodi per disegnare la sfera, aggiornare la sua posizione, gestire i rimbalzi sui bordi del canvas e verificare le collisioni con altre sfere.
 
-## Uso
+#### Metodi Principali:
 
-L'animazione inizia automaticamente quando si apre la pagina web. I cerchi si muovono in modo casuale all'interno del canvas, rimbalzando sui bordi.
+- `draw()`: Disegna la sfera sul canvas.
+- `update()`: Aggiorna la posizione della sfera in base alla sua velocità e gestisce i rimbalzi sui bordi del canvas.
+- `checkCollision(other)`: Verifica se la sfera corrente collide con un'altra sfera (`other`) e gestisce la collisione.
 
-Un pulsante permette di avviare o resettare l'applicazione.
+### Funzioni di Supporto
 
-## Struttura del codice
+#### Funzione `getRandomColor()`
 
-Il codice è strutturato in questo modo:
+Questa funzione restituisce un colore casuale dalla lista predefinita di colori, garantendo che i colori non si ripetano.
 
-- Creazione dell'elemento canvas e impostazione delle dimensioni.
-- Definizione della classe Circle, che rappresenta un cerchio che può muoversi, rilevare collisioni con altri cerchi.
-- Creazione di un array di cerchi.
-- Definizione di una funzione di aggiornamento che cancella il canvas, muove i cerchi, li disegna e controlla le collisioni.
-- Aggiunta di un pulsante per resettare l'applicazione.
+#### Funzione `restart()`
 
-## Autore del progetto
+La funzione `restart()` reimposta lo stato dell'applicazione. Ricrea le sfere e reinizializza i colori in modo casuale senza ripetizioni.
 
-Nicolò Nordio 4°IB
+### Funzione Principale `update()`
+
+La funzione `update()` è responsabile dell'aggiornamento continuo delle posizioni delle sfere nel canvas. Ogni frame, le sfere vengono spostate, disegnate e le collisioni vengono verificate e gestite.
+
+## Principi Fisici delle Collisioni
+
+Le collisioni tra le sfere sono gestite secondo i principi fisici delle collisioni elastiche. Quando due sfere collidono, vengono calcolate le nuove velocità delle sfere coinvolte basate sulla conservazione della quantità di moto e l'angolo di collisione.
+
+L'implementazione delle leggi fisiche nelle collisioni assicura un comportamento realistico e dinamico delle sfere all'interno del canvas.
+
+L'uso delle funzioni trigonometriche, come `Math.atan2`, è essenziale per calcolare angoli e direzioni nelle collisioni e garantire un corretto aggiornamento delle velocità delle sfere coinvolte.
