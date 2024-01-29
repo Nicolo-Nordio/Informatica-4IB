@@ -43,6 +43,10 @@ class Circle {
         let distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < this.r + other.r) {
+            // Unisce i colori dei cerchi in collisione
+            this.color = mergeColor(this.color, other.color);
+            other.color = this.color;
+
             // Calcola l'angolo di collisione tra i due cerchi
             let angle = Math.atan2(dy, dx);
 
@@ -68,23 +72,47 @@ class Circle {
             this.vy = Math.sin(angle) * final_vx1 + Math.sin(angle + Math.PI / 2) * vy1;
             other.vx = Math.cos(angle) * final_vx2 + Math.cos(angle + Math.PI / 2) * vy2;
             other.vy = Math.sin(angle) * final_vx2 + Math.sin(angle + Math.PI / 2) * vy2;
+
+            return true;
         }
+        return false;
     }
 }
 
 // Creazione array di colori rgb (rosso, verde, blu, giallo)
-let colors = ['rgb(255,0,0)', 'rgb(0,255,0)', 'rgb(0,0,255)', 'rgb(255,255,0)'];
+let colors = ['255,0,0', '0,255,0', '0,0,255', '255,255,0'];
 
 const positionX = w / 4;
 const positionY = h / 4;
 
+const rad = 35; //radius della palla
+
 // Creazione dei cerchi
 let circles = [
-    new Circle(positionX, positionY, 50, colors[0], Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(3 * positionX, positionY, 50, colors[1], Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(positionX, 3 * positionY, 50, colors[2], Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(3 * positionX, 3 * positionY, 50, colors[3], Math.random() * 2 - 1, Math.random() * 2 - 1)
+    new Circle(positionX, positionY, rad, `rgb(${colors[0]})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
+    new Circle(3 * positionX, positionY, rad, `rgb(${colors[1]})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
+    new Circle(positionX, 3 * positionY, rad, `rgb(${colors[2]})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
+    new Circle(3 * positionX, 3 * positionY, rad, `rgb(${colors[3]})`, Math.random() * 2 - 1, Math.random() * 2 - 1)
 ];
+
+function mergeColor(color1, color2) {
+    // Parse the RGB values from the input strings
+    const r1 = parseInt(color1.split(',')[0]);
+    const g1 = parseInt(color1.split(',')[1]);
+    const b1 = parseInt(color1.split(',')[2]);
+    const r2 = parseInt(color2.split(',')[0]);
+    const g2 = parseInt(color2.split(',')[1]);
+    const b2 = parseInt(color2.split(',')[2]);
+
+    // Calculate the average RGB values of the two input colors
+    const rAvg = (r1 + r2) / 2;
+    const gAvg = (g1 + g2) / 2;
+    const bAvg = (b1 + b2) / 2;
+
+    // Return the new merged color as a string in the format "rgb(r, g, b)"
+    return `rgb(${rAvg}, ${gAvg}, ${bAvg})`;
+}
+
 
 // Funzione di aggiornamento
 function update() {
@@ -97,9 +125,10 @@ function update() {
     }
     requestAnimationFrame(update);
 
+    // Controlla se ci sono collisioni tra le palle
     for (let i = 0; i < circles.length; i++) {
         for (let j = i + 1; j < circles.length; j++) {
-            circles[i].checkCollision(circles[j]);
+            circles[i].checkCollision(circles[j])
         }
     }
 }
@@ -130,10 +159,10 @@ function restart() {
 
     // Resetta i cerchi e assegna colori random
     circles = [
-        new Circle(positionX, positionY, 50, getRandomColor(), Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(3 * positionX, positionY, 50, getRandomColor(), Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(positionX, 3 * positionY, 50, getRandomColor(), Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(3 * positionX, 3 * positionY, 50, getRandomColor(), Math.random() * 2 - 1, Math.random() * 2 - 1)
+        new Circle(positionX, positionY, rad, `rgb(${getRandomColor()})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
+        new Circle(3 * positionX, positionY, rad, `rgb(${getRandomColor()})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
+        new Circle(positionX, 3 * positionY, rad, `rgb(${getRandomColor()})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
+        new Circle(3 * positionX, 3 * positionY, rad, `rgb(${getRandomColor()})`, Math.random() * 2 - 1, Math.random() * 2 - 1)
     ];
 }
 
