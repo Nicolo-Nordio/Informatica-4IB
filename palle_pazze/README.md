@@ -20,6 +20,10 @@ La classe `Circle` rappresenta una sfera nel canvas, con proprietà come posizio
 
 Questa funzione restituisce un colore casuale dalla lista predefinita di colori, garantendo che i colori non si ripetano.
 
+#### Funzione `mergeColors()`
+
+Il metodo `mergeColors()` è responsabile della fusione dei colori di due sfere in collisione. Questo metodo prende come input due sfere e restituisce un nuovo colore che è una combinazione dei colori delle due sfere.
+
 #### Funzione `restart()`
 
 La funzione `restart()` reimposta lo stato dell'applicazione. Ricrea le sfere e reinizializza i colori in modo casuale senza ripetizioni.

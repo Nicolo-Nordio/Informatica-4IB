@@ -5,6 +5,9 @@ const ctx = canvas.getContext('2d');
 const w = canvas.width;
 const h = canvas.height;
 
+let countCollision = 0;
+let showCC = document.getElementById("collisionCounter");
+
 // Definizione della classe Circle
 class Circle {
     constructor(x, y, r, color, vx, vy) {
@@ -44,8 +47,9 @@ class Circle {
 
         if (distance < this.r + other.r) {
             // Unisce i colori dei cerchi in collisione
-            this.color = mergeColor(this.color, other.color);
-            other.color = this.color;
+            let mergedColor = mergeColors(this, other);
+            this.color = mergedColor;
+            other.color = mergedColor;
 
             // Calcola l'angolo di collisione tra i due cerchi
             let angle = Math.atan2(dy, dx);
@@ -80,38 +84,42 @@ class Circle {
 }
 
 // Creazione array di colori rgb (rosso, verde, blu, giallo)
-let colors = ['255,0,0', '0,255,0', '0,0,255', '255,255,0'];
+let colors = ['rgb(255,0,0)', 'rgb(0,255,0)', 'rgb(0,0,255)', 'rgb(255,255,0)'];
 
 const positionX = w / 4;
 const positionY = h / 4;
 
 const rad = 35; //radius della palla
 
+// Ottiene una velocità random
+function getRandomVelocity(){
+    return Math.random() * 3;
+}
+
 // Creazione dei cerchi
 let circles = [
-    new Circle(positionX, positionY, rad, `rgb(${colors[0]})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(3 * positionX, positionY, rad, `rgb(${colors[1]})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(positionX, 3 * positionY, rad, `rgb(${colors[2]})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
-    new Circle(3 * positionX, 3 * positionY, rad, `rgb(${colors[3]})`, Math.random() * 2 - 1, Math.random() * 2 - 1)
+    new Circle(positionX, positionY, rad, colors[0], getRandomVelocity(), getRandomVelocity()),
+    new Circle(3 * positionX, positionY, rad, colors[1], getRandomVelocity(), getRandomVelocity()),
+    new Circle(positionX, 3 * positionY, rad, colors[2], getRandomVelocity(), getRandomVelocity()),
+    new Circle(3 * positionX, 3 * positionY, rad, colors[3] , getRandomVelocity(), getRandomVelocity())
 ];
 
-function mergeColor(color1, color2) {
-    // Parse the RGB values from the input strings
-    const r1 = parseInt(color1.split(',')[0]);
-    const g1 = parseInt(color1.split(',')[1]);
-    const b1 = parseInt(color1.split(',')[2]);
-    const r2 = parseInt(color2.split(',')[0]);
-    const g2 = parseInt(color2.split(',')[1]);
-    const b2 = parseInt(color2.split(',')[2]);
+// Fonde i colori delle palle che si collidono
+function mergeColors(ball1, ball2) {
+    const color1 = ball1.color.substring(4, ball1.color.length - 1).split(',');
+    const color2 = ball2.color.substring(4, ball2.color.length - 1).split(',');
 
-    // Calculate the average RGB values of the two input colors
-    const rAvg = (r1 + r2) / 2;
-    const gAvg = (g1 + g2) / 2;
-    const bAvg = (b1 + b2) / 2;
+    //array con la media di ogni parametro dei colori
+    const mergedColor = [
+        Math.round((parseInt(color1[0]) + parseInt(color2[0])) / 2),
+        Math.round((parseInt(color1[1]) + parseInt(color2[1])) / 2),
+        Math.round((parseInt(color1[2]) + parseInt(color2[2])) / 2)
+    ];
 
-    // Return the new merged color as a string in the format "rgb(r, g, b)"
-    return `rgb(${rAvg}, ${gAvg}, ${bAvg})`;
+    // Ritorna il colore medio in formato RGB
+    return `rgb(${mergedColor.join(',')})`;
 }
+
 
 
 // Funzione di aggiornamento
@@ -128,9 +136,13 @@ function update() {
     // Controlla se ci sono collisioni tra le palle
     for (let i = 0; i < circles.length; i++) {
         for (let j = i + 1; j < circles.length; j++) {
-            circles[i].checkCollision(circles[j])
+           if(circles[i].checkCollision(circles[j])){
+                countCollision++;
+           }
         }
     }
+
+    showCC.innerHTML = "Collisioni tra palle = " + countCollision;
 }
 
 let usedColors = [];
@@ -159,11 +171,13 @@ function restart() {
 
     // Resetta i cerchi e assegna colori random
     circles = [
-        new Circle(positionX, positionY, rad, `rgb(${getRandomColor()})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(3 * positionX, positionY, rad, `rgb(${getRandomColor()})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(positionX, 3 * positionY, rad, `rgb(${getRandomColor()})`, Math.random() * 2 - 1, Math.random() * 2 - 1),
-        new Circle(3 * positionX, 3 * positionY, rad, `rgb(${getRandomColor()})`, Math.random() * 2 - 1, Math.random() * 2 - 1)
+        new Circle(positionX, positionY, rad, getRandomColor(), getRandomVelocity(),getRandomVelocity()),
+        new Circle(3 * positionX, positionY, rad, getRandomColor(), getRandomVelocity(), getRandomVelocity()),
+        new Circle(positionX, 3 * positionY, rad, getRandomColor(), getRandomVelocity(), getRandomVelocity()),
+        new Circle(3 * positionX, 3 * positionY, rad, getRandomColor(), getRandomVelocity(), getRandomVelocity())
     ];
+
+    countCollision = 0;
 }
 
 update();

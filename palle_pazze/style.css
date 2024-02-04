@@ -3,7 +3,7 @@ h1 {
 }
 
 body {
-    background-color: rgb(255, 180, 136);
+    background-color: rgb(255, 201, 169);;
 }
 
 #mycanvas {
@@ -11,7 +11,7 @@ body {
     background-color: rgb(240, 248, 255);
     margin: auto;
     display: block;
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 button {
@@ -24,4 +24,9 @@ button {
 
 button:hover{
     background-color: rgb(200, 197, 197);
+}
+
+#collisionCounter{
+   margin: 30px;
+   text-align: center;
 }
