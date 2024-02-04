@@ -1,3 +1,25 @@
-header {
+html{
+    padding: 15%;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+main {
+    background-color: rgb(233, 234, 236);
+    padding: 15px;
+    border-radius: 10px;    
+}
+
+.image {
     text-align: end;
+}
+
+.flex-box{
+    display: inline-flex;
+    flex-flow: row wrap;
+}
+
+.name{
+    color: rgb(87, 87, 87);
+    padding-left: 15px;
 }
