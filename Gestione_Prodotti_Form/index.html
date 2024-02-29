@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lista_prodotti_form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Lista prodotti con form</h1>
+    <div id="product-list"></div>
+    <hr>      
+    <form id="selezione">
+        <ul>
+            <li>Categoria: 
+                <select id="category">
+                    <option>Seleziona</option>
+                    <option name="option1" value="cibo">Cibo</option>
+                    <option name="option2" value="utensili">Utensili</option>
+                    <option name="option2" value="vestiti">Vestiti</option>
+                </select>
+            </li>
+        </ul>
+
+        <ul>
+            <li>Codice: <input id="codice" type="text" placeholder="A00000"></li>
+        </ul>
+
+        <ul>
+            <li>Nome: <input id="nome" type="text" placeholder="Inserisci qui"></li>
+        </ul>
+
+        <ul>
+            <li>Descrizione: <input id="descrizione" type="text" placeholder="Inserisci qui"></li>
+        </ul>
+
+        <ul>
+            <li>Prezzo: <input id="prezzo" type="text" placeholder="0.00 €"></li>
+        </ul>
+
+        <ul>
+            <li>
+                Sconto: 
+                <input id="5" type="radio" name="sconto" value="5">5%
+                <input id="10" type="radio" name="sconto" value="5">10%
+                <input id="15" type="radio" name="sconto" value="5">15%
+                <input id="20" type="radio" name="sconto" value="5">20%
+            </li>
+        </ul>
+
+        <ul>
+            <li>
+                In magazzino?
+                <input id="in-stock" type="checkbox">Si
+            </li>
+        </ul>
+
+        <hr>
+        <div id="conferma">
+            <button onclick="saveProduct();">Salva</button>
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>
