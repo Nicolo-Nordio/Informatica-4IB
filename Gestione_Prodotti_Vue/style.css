@@ -1,0 +1,78 @@
+html {
+    padding-left: 20%;
+    padding-right: 20%;
+    background-color: rgb(232, 248, 248);
+}
+
+h1 {
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    border: 1px dashed;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+input:placeholder-shown {
+    text-align: center;
+}
+
+input {
+    text-align: center;
+}
+
+#product-list {
+    margin-left: 20px;
+    padding: 20px;
+    width: 450px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 1px solid;
+}
+
+#selezione {
+    background-color: rgb(231, 230, 230);
+    padding-right: 10px;
+    border-radius: 15px;
+    border: 1px solid;
+}
+
+#category {
+    cursor: pointer;
+}
+
+#delete{
+    width: 80px;
+    border-radius: 15px;
+    border: 1px solid;
+    margin-right: 10px;
+}
+
+#delete:hover {
+    background-color: rgb(226, 222, 222);
+    cursor: pointer;
+}
+
+#buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#buttons button {
+    width: 80px;
+    border-radius: 15px;
+    border: 1px solid;
+    margin-right: 10px;
+}
+
+#buttons button:hover {
+    background-color: rgb(226, 222, 222);
+    cursor: pointer;
+}

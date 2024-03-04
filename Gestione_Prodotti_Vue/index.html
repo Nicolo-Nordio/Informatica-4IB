@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Gestione_Prodotti_Vue</title>
+</head>
+
+<body>
+    <h1>Gestione Prodotti Vue.js</h1>
+    <div id="app">
+        <div class="flex-container">
+            <form id="selezione">
+                <ul>
+                    <li>Categoria:
+                        <select id="category" v-model="prodotto.categoria">
+                            <option name="option1" value="Cibo">Cibi</option>
+                            <option name="option2" value="Utensile">Utensili</option>
+                            <option name="option2" value="Vestito">Vestiti</option>
+                        </select>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>Codice: <input id="codice" type="text" placeholder="A00000" v-model="prodotto.codice"></li>
+                </ul>
+
+                <ul>
+                    <li>Nome: <input id="nome" type="text" placeholder="Inserisci qui" v-model="prodotto.nome"></li>
+                </ul>
+
+                <ul>
+                    <li>Descrizione: <input id="descrizione" type="text" placeholder="Inserisci qui"
+                            v-model="prodotto.descrizione"></li>
+                </ul>
+
+                <ul>
+                    <li>Prezzo: <input id="prezzo" type="text" placeholder="0.00 €" v-model="prodotto.prezzo"></li>
+                </ul>
+
+                <ul>
+                    <li>
+                        Sconto:
+                        <input id="s5" type="radio" name="sconto" value="5" v-model="prodotto.sconto">5%
+                        <input id="s10" type="radio" name="sconto" value="10" v-model="prodotto.sconto">10%
+                        <input id="s15" type="radio" name="sconto" value="15" v-model="prodotto.sconto">15%
+                        <input id="s20" type="radio" name="sconto" value="20" v-model="prodotto.sconto">20%
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        In magazzino?
+                        <input id="in-stock" type="checkbox" v-model="prodotto.magazzino">Si
+                    </li>
+                </ul>
+            </form>
+            <div id="product-list">
+                <li v-for="(item, index) in prodotti">
+                    <button id="delete" v-on:click="deleteProduct(index)">Delete</button> {{ item.categoria }},
+                    {{item.codice }}, {{ item.nome }}, {{ item.prezzo }}€, {{ item.magazzino ? 'In magazzino' : 'In ordinazione' }}
+                </li>
+            </div>
+        </div>
+        <div id="buttons">
+            <button v-on:click="clearForm">Clear</button>
+            <button v-on:click="saveProduct()">Submit</button>
+            <button v-on:click="deleteAll">Delete all</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
