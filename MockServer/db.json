@@ -1,0 +1,25 @@
+{
+    "people": [
+        {
+            "id": 1,
+            "surname": "Rossi",
+            "name": "Mario",
+            "age": 30,
+            "city": "Roma"
+        },
+        {
+            "id": 2,
+            "surname": "Bianchi",
+            "name": "Giovanni",
+            "age": 45,
+            "city": "Milano"
+        },
+        {
+            "id": 3,
+            "surname": "Verdi",
+            "name": "Luigi",
+            "age": 25,
+            "city": "Napoli"
+        }
+    ]
+}
