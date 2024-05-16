@@ -1,0 +1,16 @@
+{
+    "valuta":[
+        {
+            "sigla":0,
+            "nome":"",
+            "tasso":0,
+            "img":0
+        }
+    ],
+
+    "listaValute":[
+        {
+            
+        }
+    ]
+}
