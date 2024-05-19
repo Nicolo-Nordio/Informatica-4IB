@@ -1,16 +1,34 @@
 {
-    "valuta":[
+    "listaValute": [
         {
-            "sigla":0,
-            "nome":"",
-            "tasso":0,
-            "img":0
-        }
-    ],
-
-    "listaValute":[
+            "sigla": "EUR",
+            "nome": "Euro",
+            "tasso": 1,
+            "img": "Bandiere/eu.jpg"
+        },
         {
-            
+            "sigla": "USD",
+            "nome": "Dollaro statunitense",
+            "tasso": 0.92831,
+            "img": "Bandiere/um.jpg"
+        },
+        {
+            "sigla": "RUB",
+            "nome": "Rublo russo",
+            "tasso": 0.01,
+            "img": "Bandiere/ru.jpg"
+        },
+        {
+            "sigla": "TRY",
+            "nome": "Lira turca",
+            "tasso": 0.029,
+            "img": "Bandiere/tr.jpg"
+        },
+        {
+            "sigla": "INR",
+            "nome": "Rupia indiana",
+            "tasso": 0.011,
+            "img": "Bandiere/in.jpg"
         }
     ]
 }

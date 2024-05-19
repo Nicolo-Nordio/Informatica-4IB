@@ -1,3 +1,58 @@
-h1{
+html {
+    background-color: aliceblue;
+}
+
+h1 {
     text-align: center;
+}
+
+input {
+    text-align: center;
+}
+
+img {
+    height: 50px;
+    width: 75px;
+    border-radius: 8px;
+}
+
+#arrow-img {
+    height: 50px;
+    width: auto;
+}
+
+#v-convertita {
+    cursor: auto;
+}
+
+#conversione {
+    text-align: center;
+}
+
+button {
+    width: 110px;
+    height: 35px;
+    font-size: 20px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px rgb(85, 85, 85);
+    border: 1px solid;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: ;
+}
+
+select {
+    cursor: pointer;
+}
+
+#container {
+    
+}
+
+#flex-box {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }
