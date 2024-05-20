@@ -58,6 +58,7 @@ dropdownSx.addEventListener('change', (event) => {
                 const valuta = listaValute[0];
                 tassoConversione1 = valuta.tasso;
                 imgSx.src = valuta.img;
+                imgSx.style.display = "inline";
             }
         });
 });
@@ -75,6 +76,7 @@ dropdownDx.addEventListener('change', (event) => {
                 const valuta = listaValute[0];
                 tassoConversione2 = valuta.tasso;
                 imgDx.src = valuta.img;
+                imgDx.style.display = "inline";
             }
         });
 });

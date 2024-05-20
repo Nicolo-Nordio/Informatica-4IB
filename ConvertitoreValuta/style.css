@@ -1,5 +1,5 @@
 html {
-    background-color: aliceblue;
+    background-color: rgb(169, 187, 202);
 }
 
 h1 {
@@ -21,34 +21,47 @@ img {
     width: auto;
 }
 
+#img-sx,
+#img-dx {
+    display: none;
+}
+
 #v-convertita {
     cursor: auto;
 }
 
 #conversione {
     text-align: center;
+    padding-top: 20px;
 }
 
 button {
-    width: 110px;
+    width: 100px;
     height: 35px;
     font-size: 20px;
     border-radius: 20px;
     box-shadow: 2px 2px 4px rgb(85, 85, 85);
     border: 1px solid;
     cursor: pointer;
+    background-color: rgb(9, 221, 55);
 }
 
 button:hover {
-    background-color: ;
+    background-color: rgb(6, 185, 45);
+    width: 110px;
 }
 
 select {
     cursor: pointer;
+    text-align: center;
+}
+
+option {
+    text-align: center;
 }
 
 #container {
-    
+    padding: 300px;
 }
 
 #flex-box {

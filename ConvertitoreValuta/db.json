@@ -19,6 +19,12 @@
             "img": "Bandiere/ru.jpg"
         },
         {
+            "sigla": "UAH",
+            "nome": "Grivnia ucraina",
+            "tasso": 0.023,
+            "img": "Bandiere/ua.jpg"
+        },
+        {
             "sigla": "TRY",
             "nome": "Lira turca",
             "tasso": 0.029,
@@ -29,6 +35,24 @@
             "nome": "Rupia indiana",
             "tasso": 0.011,
             "img": "Bandiere/in.jpg"
+        },
+        {
+            "sigla": "MAD",
+            "nome": "Dirham marocchino",
+            "tasso": 0.093,
+            "img": "Bandiere/ma.jpg"
+        },
+        {
+            "sigla": "RSD",
+            "nome": "Dinaro serbo",
+            "tasso": 0.0085,
+            "img": "Bandiere/rs.jpg"
+        },
+        {
+            "sigla": "CNY",
+            "nome": "Yuan cinese",
+            "tasso": 0.13,
+            "img": "Bandiere/cn.jpg"
         }
     ]
 }
