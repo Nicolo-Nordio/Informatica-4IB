@@ -4,55 +4,55 @@
             "sigla": "EUR",
             "nome": "Euro",
             "tasso": 1,
-            "img": "Bandiere/eu.jpg"
+            "img": "assets/Bandiere/eu.jpg"
         },
         {
             "sigla": "USD",
             "nome": "Dollaro statunitense",
             "tasso": 0.92831,
-            "img": "Bandiere/um.jpg"
+            "img": "assets/Bandiere/um.jpg"
         },
         {
             "sigla": "RUB",
             "nome": "Rublo russo",
             "tasso": 0.01,
-            "img": "Bandiere/ru.jpg"
+            "img": "assets/Bandiere/ru.jpg"
         },
         {
             "sigla": "UAH",
             "nome": "Grivnia ucraina",
             "tasso": 0.023,
-            "img": "Bandiere/ua.jpg"
+            "img": "assets/Bandiere/ua.jpg"
         },
         {
             "sigla": "TRY",
             "nome": "Lira turca",
             "tasso": 0.029,
-            "img": "Bandiere/tr.jpg"
+            "img": "assets/Bandiere/tr.jpg"
         },
         {
             "sigla": "INR",
             "nome": "Rupia indiana",
             "tasso": 0.011,
-            "img": "Bandiere/in.jpg"
+            "img": "assets/Bandiere/in.jpg"
         },
         {
             "sigla": "MAD",
             "nome": "Dirham marocchino",
             "tasso": 0.093,
-            "img": "Bandiere/ma.jpg"
+            "img": "assets/Bandiere/ma.jpg"
         },
         {
             "sigla": "RSD",
             "nome": "Dinaro serbo",
             "tasso": 0.0085,
-            "img": "Bandiere/rs.jpg"
+            "img": "assets/Bandiere/rs.jpg"
         },
         {
             "sigla": "CNY",
             "nome": "Yuan cinese",
             "tasso": 0.13,
-            "img": "Bandiere/cn.jpg"
+            "img": "assets/Bandiere/cn.jpg"
         }
     ]
 }
