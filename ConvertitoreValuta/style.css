@@ -35,7 +35,7 @@ img {
 #img-sx,
 #img-dx {
     display: none;
-    border: 2px solid #333;
+    border: 1px solid #333;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -90,5 +90,5 @@ select {
 #flex-box {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }

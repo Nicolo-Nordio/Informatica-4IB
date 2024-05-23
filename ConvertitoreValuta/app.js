@@ -89,7 +89,9 @@ convertitore.addEventListener("click", () => {
     if (!isNaN(inputValue) && tassoConversione1 && tassoConversione2) {
         const outputValue = ((inputValue * tassoConversione1) / tassoConversione2);
         output.value = outputValue.toFixed(2) + " " + sigla;
-    } else {
-        alert("Inserisci un valore valido e/o seleziona le valute.");
+    } else if (isNaN(inputValue)) {
+        alert("Inserisci un valore valido");
+    } else if (tassoConversione1 == 0 || tassoConversione2 == 0) {
+        alert("Inserisci la valuta");
     }
 });
